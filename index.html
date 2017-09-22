@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.mask{
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: rgb(0,0,0);
+			}
+			.mask h1{
+				font-size: 50px;
+				color: white;
+				margin: 100px 0px 20px 0px;
+			}
+			.mask input{
+				border-radius: 6px;
+				width: 200px;
+				height: 50px;
+				line-height: 50px;
+				font-size: 30px;
+			}
+			#chat{
+				/*position: absolute;
+				top: 68px;
+				right: 0;*/
+				width: 100%;
+				height: auto;
+				border: 1px solid black;
+				background:#F8F9FB ;
+				text-align: left;
+				margin: 0 auto;
+				position: relative;
+			}
+			.backdrop{
+				position: fixed;
+			    top: 0;
+			    right: 0;
+			    bottom: 0;
+			    left: 0;
+			    background: rgba(0,0,0,.6);
+			}
+			#white,#black{
+				padding: 0;
+				margin-right: 20px;
+			}
+			.chatName{
+				margin-right: 10px;
+			}
+			.form{
+				position: absolute;
+				bottom: 0;
+				width: 100%;
+			}
+		    .form input { 
+		    	border: 0; 
+		    	padding: 4px; 
+		    	width: 80%; 
+		    	margin-right: .5%; 
+		    }
+		    .form button {
+		    	width: 18%; 
+		    	background: rgb(130, 224, 255); 
+		    	border-radius: 5px; 
+		    	padding: 4px; 
+		    }
+		    #messages {
+		    	list-style-type: none; 
+		    	margin: 0; 
+		    	padding: 0; 
+		    	overflow: hidden;
+		    }
+		    #messages ul li { 
+		    	padding: 5px 10px;
+		    	color: lightseagreen;
+		    }
+		    #messages ul li:nth-child(odd) { 
+		    	background: #eee;
+		    	color: darkblue;
+		    }
+		</style>
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+	</head>
+	<body >
+		<section style="text-align: center;max-width: 640px;margin: 0 auto;position: relative;">
+			<!--房间主体-->
+			<div class="main">
+				<div><p style="text-align: center;height: 40px;font-size: 30px;margin: 0;">五子棋大作战</p></div>
+				<canvas id="canvas"  onclick="play(event)"  style="background: url(img/bak.jpg);"></canvas>
+				<div id="chat">
+					<div id="messages">
+						<ul>
+						</ul>
+					</div>
+					<div class="form">
+						<input type="text" id="inputMessage" /><button id="send" >发送</button>
+					</div>
+				</div>				
+			</div>
+			<!--	弹出框-->
+			<div class="dialog">
+				<div class="modal show" id="myModal">
+					<div class="backdrop"></div>
+					<div class="modal-dialog">
+						<div class="modal-content">
+								<div class="modal-header">
+									<h4 class="modal-title">登了个录</h4>
+								</div>
+								<div class="modal-body">
+									<form class="">
+										<div class="form-group has-success has-feedback">
+											<label class="control-label" >姓名</label>
+											<input id="userTxt" class="form-control" type="text" placeholder="输入您的大名" />
+										</div>
+										<div class="form-group">
+											<label >密码</label>
+											<input id="passTxt" class="form-control" type="password" placeholder="请输入您的密码" />
+										</div>
+									</form>	
+								</div>
+								<div class="modal-footer">
+										<div class="col-md-8">
+											<div style="text-align: left;">
+												<span>使用第三方登录</span>
+												<span id="qq"><img src="img/qq_3d.png" width="40"height="40"/></span>
+												<span id="wx"><img src="img/mm.png" width="60"height="60"/></span>
+											</div>
+										</div>
+										<div class="col-md-4">
+											<button id="Reg" class="btn btn-default">注册</button>
+											<button id="login" class="btn btn-primary">登录</button>
+										</div>
+								</div>
+						</div>
+					</div>
+				</div>
+				<div id="choose">
+					<!--<div class="modal">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h4 class="modal-title text-center">请选择棋子</h4>
+								</div>
+								<div class="modal-body text-center">
+									<button id="white" class="btn btn-default "><img src="img/white.png"  width="100%" height="100%"/></button>
+									<button id="black" class="btn btn-primary"><img src="img/black.png"  width="100%" height="100%"/></button>
+								</div>
+							</div>
+						</div>					
+					</div>-->
+				</div>				
+			</div>
+		</section>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="https://code.jquery.com/jquery-1.11.1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/iscroll-lite.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/game.js" type="text/javascript" charset="utf-8"></script>	
+	</body>
+</html>
